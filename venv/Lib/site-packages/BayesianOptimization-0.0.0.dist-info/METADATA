@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: BayesianOptimization
+Version: 0.0.0
+Summary: Bayesian Optimization
+Home-page: UNKNOWN
+Author: Logan Grado
+Author-email: grado.logan@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Dist: numpy
+
+UNKNOWN
+
+

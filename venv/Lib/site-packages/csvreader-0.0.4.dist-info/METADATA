@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: csvreader
+Version: 0.0.4
+Summary: A Library that Reads and Writes CSV Files Quickly.
+Home-page: UNKNOWN
+Author: SF Publishing
+Author-email: UNKNOWN
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Dist: pip
+Requires-Dist: setuptools
+Requires-Dist: wheel
+Requires-Dist: virtualenv
+
+
+Welcome.This Module has 2 main functions: ReadCSV and WriteCSV. To know more, type:
+       ```
+       `
+       python -m pip install csvreader
+       ```
+       or 
+
+       ```
+       python3 -m pip install csvreader
+       ```
+
+       Windows: 
+
+       ```
+       py -m pip install csvreader
+       ```
+
+
