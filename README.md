@@ -1,7 +1,13 @@
 # DSSC: Information Retrieval
 In this repo you will find information on Information Retrieval course attended at Trieste University. In details,this is the project folder containing an implementation of the Quasi-Real Music Recommender System, well summarized by the pdf presentation.
 
+The aim of this project is develop a Recommender System, but here 4 different Recommender Systems are proposed:
+- **RelevanceBasedRS** - It is a, so called, Cold Start Recommender System providing N items to the user according a certain set of fields about the feature of the items themself;
+- **CoolStartRS** - It is a Recommender System based just on the current item and the features of all the items;
+- **WeightedMFRS** - It is a Recommendr System implementing the WALS algorithm;
+- **UserBasedRS** - It is a Recommender System implementing a collaborative recommendation among the users.
 
+Those RSs are mixed together to provide the best possible set of recommendation to the end-user.
 ## Structure of the Git Folder
 The project folder is organized in several directories, here there is a short explanation of those:
 - Folder `core` - contains the core of the project such as the tables, recommender systems and so on;
