@@ -226,7 +226,6 @@ class SQLHandler:
         """
         if conditions and not sql and data is None:
             sql, values = self.build_query(table_name, sql_opt, conditions)
-            # print(sql, values)
             try:
                 cursor.execute(sql, values)
             except sqlite3.Error as exception:

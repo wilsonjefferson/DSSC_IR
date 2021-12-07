@@ -103,7 +103,7 @@ class HistoryTable(Table):
         """
         if not self.item_not_exist(self.table_name, 'user_id', user_id) and not self.song_not_listened_by_user(
                 user_id, song_id):
-            song_repetition = self.search(conditions=(('repetition',), [('song_id', '=', song_id)])) + 1
+            song_repetition = self.search(conditions=(('repetition',), [('user_id', '=', user_id), 'AND', ('song_id', '=', song_id)])) + 1
             self.sql_handler.update(table_name=self.table_name, conditions=(
                 ('repetition', song_repetition), [('user_id', '=', user_id), 'AND', ('song_id', '=', song_id)]))
         elif self.song_not_listened_by_user(user_id, song_id):

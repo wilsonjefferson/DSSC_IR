@@ -126,7 +126,7 @@ class UserCommandLineInterface:
                 print('PLAYING SONG...')
                 self.history.add(self.current_user_id, self.current_song_id)
                 self.music_recommender.listened_song_by_user(self.current_song_id)
-                return self.home_page()
+            return self.home_page()
         elif user_opt == '1':
             print('LOGOUT...')
             return self.login_page()
