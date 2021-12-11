@@ -97,7 +97,8 @@ class CoolStartRS(RecommenderSystem):
         for column in self.columns_of_number_type:
             idx_columns_of_number_type.append(columns.index(column))
 
-        song_data = self.sql_handler.search(table_name=self.table_name, conditions=(('*',), [('song_id', '=', song_id)]))
+        song_data = self.sql_handler.search(table_name=self.table_name,
+                                            conditions=(('*',), [('song_id', '=', song_id)]))
         song_vector = []
         for idx in idx_columns_of_number_type:
             song_vector.append(song_data[idx])
@@ -111,9 +112,9 @@ class CoolStartRS(RecommenderSystem):
             1. Select n_songs items closest to current_song_id
             2. Select from (1) already listened songs, current_song_id is part of this set
                 2.1. If no how was already listened, then suggest them to the user
-            3. Compute the 'artificial middle song' among songs from (2) by means of get_vector()
-            4. Select n_songs items closest to the artificial song point
-            5. Recommend never listened n_songs from (4)
+            3. Compute the 'artificial middle song' among songs from (2)
+            4. Select the n_songs never listened items closest to the artificial song point
+            5. Recommend items from (4)
 
             Parameters
             ----------
@@ -141,11 +142,13 @@ class CoolStartRS(RecommenderSystem):
         already_listened_songs_vectors = self.k_neighbors(current_user_id, current_song_id, n_songs, index, True)
 
         if len(already_listened_songs_vectors) > 1:
-            rec_songs = []
             listened_songs_matrix = np.array(already_listened_songs_vectors)
             listened_songs_mean_vector = np.mean(listened_songs_matrix, axis=0)
 
-            if True in np.equal(self.x, listened_songs_mean_vector):
+            array_comparison_bool_matrix = np.equal(self.x, listened_songs_mean_vector)  # matrix of bool
+
+            # check if listened_songs_mean_vector is present in self.x as a vector row
+            if True in np.apply_along_axis(lambda x: True if np.alltrue(x) else False, 1, array_comparison_bool_matrix):
                 listened_mean_row = [(self.columns_of_number_type[idx], listened_songs_mean_vector[idx])
                                      for idx in range(0, len(listened_songs_mean_vector))]
                 column_conditions = []
@@ -157,16 +160,20 @@ class CoolStartRS(RecommenderSystem):
                 conditions = (('song_id',), column_conditions[:-1])
                 mean_song_id = self.sql_handler.search(self.table_name, conditions)
 
-                if mean_song_id not in self.sql_handler.search('HISTORY',
-                                                               (('song_id',), [('song_id', '=', mean_song_id)])):
-                    rec_songs.append(mean_song_id)
+                if mean_song_id and mean_song_id not in self.sql_handler.search('HISTORY',
+                                                                                (('song_id',),
+                                                                                 [('user_id', '=', current_user_id),
+                                                                                  'AND',
+                                                                                  ('song_id', '=', mean_song_id)])):
+                    self.rec_songs[mean_song_id] = 1.0  # mean_song_id first recommendation
+                    n_songs = n_songs - 1  # update number of items to find
 
             scaled_listened_songs_mean_vector = scaler.transform(listened_songs_mean_vector.reshape(1, -1))
 
-            index = neigh.kneighbors(X=scaled_listened_songs_mean_vector, n_neighbors=scaled_data.shape[0], return_distance=True)
+            index = neigh.kneighbors(X=scaled_listened_songs_mean_vector, n_neighbors=scaled_data.shape[0],
+                                     return_distance=True)
             index = [index[0][0].tolist(), index[1][0].tolist()]  # just for a better readability
-
-            self.rec_songs = self.k_neighbors(current_user_id, current_song_id, n_songs, index, False)
+            self.rec_songs.update(self.k_neighbors(current_user_id, current_song_id, n_songs, index, False))
         else:
             self.rec_songs = self.k_neighbors(current_user_id, current_song_id, n_songs, index, False)
 
