@@ -543,36 +543,3 @@ class SQLHandler:
             return True
         else:
             return False
-
-
-if __name__ == '__main__':
-    sql_handler = SQLHandler(r'../../sources/user_dataset.db')
-    sql_ddl = """CREATE TABLE IF NOT EXISTS TASKS (
-                                    id integer PRIMARY KEY,
-                                    name text NOT NULL,
-                                    priority integer,
-                                    status_id integer NOT NULL,
-                                    project_id integer NOT NULL,
-                                    begin_date text NOT NULL,
-                                    end_date text NOT NULL
-                                );"""
-
-    # sql_handler.create(sql_ddl)
-    # print(sql_handler.exist('TASKS'))
-    # print(sql_handler.columns_of('TASKS'))
-    # sql_handler.insert('TASKS', (1, 'Task1', 1, 1, 1, '2015-01-01', '2015-01-02'))
-    # sql_handler.insert('TASKS', (2, 'Task', 2, 2, 2, '2015-01-01', '2015-01-02'))
-    # sql_handler.insert('TASKS', (3, 'Task', 3, 3, 3, '2015-01-01', '2015-01-02'))
-    # print(sql_handler.search('TASKS', conditions=(('project_id', 'begin_date', 'end_date'), [('id', '=', 1), 'OR', ('id', '>', 2)])))
-    # sql_handler.update('TASKS', conditions=((('priority', 2), ('begin_date', '2015-01-04'), ('end_date', '2015-01-06')), [('id', '=', 1)]))
-    # sql_handler.delete('TASKS', conditions=((), [('id', '=', 1), 'OR', ('id', '>', 2)]))
-    # sql_handler.drop('TASKS')
-    #print(sql_handler.search(table_name='TASKS', conditions=(('id', 'status_id', 'project_id'), [('name', '=', 'Task')])))
-    # print(sql_handler.search('TASKS', sql='SELECT id FROM TASKS WHERE id=2'))
-    #sql_handler.store('TASKS', r'../../sources/Tasks.csv')
-    # sql_handler.load(table_name='TASKS', sql=sql_ddl, path_file=r'../../sources/Tasks.csv', separator='\t')
-    # sql_handler.alter('TASKS', 'rename', 'Tasks1')
-    #sql_handler.alter('Tasks1', 'add_column', 'team_leader')
-    # sql_handler.alter('Tasks1', 'rename_column', ['team_leader', 'leader'])
-    # print(sql_handler.print('Tasks1', 'id'))
-    # sql_handler.drop('Tasks1')

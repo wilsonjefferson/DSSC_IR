@@ -60,10 +60,3 @@ class RelevanceBasedRS(RecommenderSystem):
 
     def __str__(self):
         return self.print('RelevanceBasedRS', self.rec_songs) if self.rec_songs else ''
-
-
-if __name__ == '__main__':
-    relevance_recommender = RelevanceBasedRS('SONGS')
-    relevance_recommender.recommend_songs(['popularity'])
-    for song_id, distance in relevance_recommender.recommend_songs(['popularity']).items():
-        print(song_id, distance)

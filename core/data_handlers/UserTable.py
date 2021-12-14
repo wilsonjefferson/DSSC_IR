@@ -224,21 +224,3 @@ class UserTable(Table):
             email = username + '@gmail.com'
             country = 'country' if random.choice([True, False]) else None
             self.add(username, password, email, country, ignore=True)
-
-
-if __name__ == '__main__':
-    users = UserTable(username='Pietro', password='pwd', email='pietro.admin@gmail.com')
-    # users = UserTable()
-    users.column_value_already_used('username', 'Pietro')
-    print(users.search((('email', ), [('user_id', '=', '0')])))
-    users.add('Pietro', 'Ciccio', 'pierpa.m.96@gmail.com', 'Italy')
-    users.add('Franco', 'Ciccio', 'pierpa.m.96@gmail.com')
-    print(users.search((('username', ), [('user_id', '=', '0')])))
-    users.update('0', 'password', 'Pasticcio')
-    users.remove('1')
-    users.add('Franco', 'Ciccio', 'pierpa.m.96@gmail.com')
-    print(users)
-    # users.store_csv()
-
-    # users.generator(1000)
-    # users.store_csv()

@@ -202,26 +202,3 @@ class WeightedALS(GeneralModel):
                   format(self.n_latent_factors, self.regularization, self.n_iteration))
         plt.legend(loc='best')
         plt.show()
-
-
-if __name__ == '__main__':
-    np.random.seed(0)
-    n_users, n_items = (100, 1000)
-    data = np.random.randint(low=0, high=6, size=(n_users, n_items))
-    n_iter = 100
-    reg = 0.05
-    n_factors = 50
-
-    df = pd.read_csv(filepath_or_buffer=r'../../sources/raw_data/yahoo_music/Ratings0.csv', sep=',', nrows=50000)
-    data = df.pivot_table(index="user_id", columns="song_id", values="ratings", dropna=False, fill_value=0)
-    data = data.values
-
-    w = np.ones(shape=data.shape)
-    bias_total = 0.0
-    b_rows = np.zeros(shape=(data.shape[0], 1))
-    b_columns = np.zeros(shape=(1, data.shape[1]))
-
-    w_als = WeightedALS(data, reg, n_iter, n_factors, w, bias_total, b_rows, b_columns)
-    latent_users, latent_items = w_als.fit()
-    predicted_ratings = latent_users.dot(latent_items.T)
-    w_als.plot()

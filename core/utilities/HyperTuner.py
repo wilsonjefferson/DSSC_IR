@@ -180,38 +180,3 @@ class HyperTuner:
             Nothing
         """
         return self.biasOptimizer.max
-
-
-if __name__ == '__main__':
-    np.random.seed(0)
-    n_users, n_items = (100, 1000)
-    data = np.random.randint(low=0, high=6, size=(n_users, n_items))
-    n_iter = 100
-    reg = 0.01
-    n_factors = 20
-
-    w = np.ones(shape=data.shape)
-
-    optimizer = HyperTuner(x=data, object_class=WeightedMF,
-                           pbounds={'regularization': (0.01, 1.0),
-                                    'n_latent_factors': (20, 60),
-                                    'n_iteration': (100, 120)},
-                           random_state=1,
-                           bounds_transformer=None,
-                           max_opt=False, verbose=2)
-
-    optimizer.maximize(init_points=20, n_iter=5)
-
-    loss_score = optimizer.max['target']
-    tuned_regularization = optimizer.max['params']['regularization']
-    tuned_n_latent_factors = int(optimizer.max['params']['n_latent_factors'])
-    tuned_n_iteration = int(optimizer.max['params']['n_iteration'])
-
-    print('loss: {0:.2f}\ntuned_reg: {1:.2f}\ntuned_n_latent_factors: {2:.2f}\ntuned_n_iteration: {3:.2f}'.
-          format(np.abs(loss_score), tuned_regularization, tuned_n_latent_factors, tuned_n_iteration))
-
-    wmf = WeightedMF(x=data, include_inner_biases=True)
-    wmf.fit(tuned_regularization, tuned_n_iteration, tuned_n_latent_factors, w, True)
-    print(wmf.predict_x)
-    wmf.plot_wals_mse()
-    print('Loss(R, U, V, bias, b_u, b_v, reg):', wmf.score())

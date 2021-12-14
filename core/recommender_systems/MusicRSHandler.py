@@ -259,36 +259,3 @@ class MusicRSHandler(RecommenderSystem):
 
     def __str__(self):
         return super().print('MusicRSHandler', self.rec_songs) if self.rec_songs else ''
-
-
-if __name__ == '__main__':
-    music_handler = MusicRSHandler()
-    music_handler.refresh()
-
-    user = '0'
-    song = '2245'
-    columns_names = ['popularity']
-
-    print('Recommended songs')
-    for id_song, score in music_handler.recommend_songs(current_user_id=user, current_song_id=song, column_names=columns_names).items():
-        print(id_song, score)
-    print()
-
-    print('CoolStartRS')
-    for id_song, score in music_handler.cool_recommended().items():
-        print(id_song, score)
-    print()
-
-    print('RelevanceBasedRS')
-    for id_song, score in music_handler.relevance_recommended().items():
-        print(id_song, score)
-    print()
-
-    print('WeightedMFBasedRS')
-    for id_song, score in music_handler.wmf_recommended().items():
-        print(id_song, score)
-    print()
-
-    print('UserBasedRS')
-    for id_song, score in music_handler.user_based_recommended().items():
-        print(id_song, score)

@@ -147,22 +147,3 @@ class WeightedMF(GeneralModel):
             Nothing
         """
         self.wals.plot()
-
-
-if __name__ == '__main__':
-    np.random.seed(0)
-    n_users, n_items = (100, 1000)
-    data = np.random.randint(low=0, high=6, size=(n_users, n_items))
-    n_iter = 100
-    reg = 0.05
-    n_factors = 50
-
-    df = pd.read_csv(filepath_or_buffer=r'../../sources/raw_data/yahoo_music/Ratings0.csv', sep=',', nrows=50000)
-    data = df.pivot_table(index="user_id", columns="song_id", values="ratings", dropna=False, fill_value=0)
-    data = data.values
-    w = np.ones(shape=data.shape)
-
-    wmf = WeightedMF(x=data, include_inner_biases=False)
-    wmf.fit(reg, n_iter, n_factors, w, split_wals=False, weighted_mf_score_function=True)
-    wmf.plot_wals_mse()
-    print('Loss(R, U, V, bias, b_u, b_v, reg):', wmf.score())

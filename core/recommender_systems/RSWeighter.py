@@ -56,15 +56,3 @@ class RSWeighter:
             raise RSNotInstantiatedException()
 
         return [1.0 / len(self.recommenders) for _ in range(len(self.recommenders))]
-
-
-if __name__ == '__main__':
-    cold_start_recommender = CoolStartRS()
-    relevance_recommender = RelevanceBasedRS('SONGS')
-
-    cold_songs = cold_start_recommender.recommend_songs('U-0000', 'S-000')
-    relevance_songs = relevance_recommender.recommend_songs(['popularity'])
-
-    rs_weighter = RSWeighter()
-    rs_weighter.set({cold_start_recommender: cold_songs, relevance_recommender: relevance_songs})
-    rs_weighter.uniform_weight()

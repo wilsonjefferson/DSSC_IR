@@ -206,15 +206,3 @@ class RatingsTable(Table):
 
     def generator(self, occurrences: int = 100):
         pass
-
-
-if __name__ == '__main__':
-    ratings = RatingsTable(path_file=r'../../sources/processed_data/yahoo_music/Ratings.csv')
-    # ratings.add('U-0000', '0BRjO6ga9RKCKjfDqeFgWV', 4)
-    # ratings.add('U-0001', '0BjC1NfoEOOusryehmNudP', 1)
-    # ratings.update('U-0000', '0BRjO6ga9RKCKjfDqeFgWV', 2)
-    # ratings.update('U-0002', '0BRjO6ga9RKCKjfDqeFgWV', 2)
-    # ratings.remove('U-0000', '0BRjO6ga9RKCKjfDqeFgWV')
-    # print(ratings)
-    # ratings.store_csv()
-    # ratings.drop()

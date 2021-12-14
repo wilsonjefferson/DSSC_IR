@@ -181,13 +181,3 @@ class CoolStartRS(RecommenderSystem):
 
     def __str__(self):
         return self.print('CoolStartRS', self.rec_songs) if self.rec_songs else ''
-
-
-if __name__ == '__main__':
-    cold_start_recommender = CoolStartRS()
-    user = 'U-0000'
-    song = '0CoSDzoNIKCRs124s9uTVy'
-    recommended_songs = cold_start_recommender.recommend_songs(user, song)
-
-    for song_id, distance in recommended_songs.items():
-        print(song_id, distance)

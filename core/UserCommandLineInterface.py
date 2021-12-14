@@ -142,17 +142,3 @@ class UserCommandLineInterface:
         else:
             print('QUITTING...')
             return False
-
-
-if __name__ == '__main__':
-
-    songs_csv_file = r'../sources/processed_data/spotify_music/SpotifyFeatures.csv'
-    users_csv_file = r'../sources/User.csv'
-    history_csv_file = r'../sources/History.csv'
-    ratings_csv_file = r'../sources/processed_data/yahoo_music/Ratings.csv'
-
-    cli = UserCommandLineInterface(users_csv_file, songs_csv_file, history_csv_file, ratings_csv_file)
-    login_state = cli.login_page()
-
-    while login_state is True:
-        login_state = cli.home_page()

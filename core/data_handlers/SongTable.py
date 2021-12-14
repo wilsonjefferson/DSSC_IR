@@ -185,15 +185,3 @@ class SongTable(Table):
 
     def generator(self, occurrences: int = 100):
         pass
-
-
-if __name__ == '__main__':
-    songs = SongTable('../../sources/processed_data/spotify_music/SpotifyFeatures.csv')
-    print(songs.search((('artist_name', ), [('song_id', '=', '0')])))
-    song = songs.add('Movie', 'Pietro Morichetti', "C'est beau de faire un Show", 0, 0.611, 0.389,
-                     99373, 0.91, 0.0, 'C#', 0.346, -1.828, 'Major', 0.0525, 166.969, '4/4', 0.814)
-    songs.update(song, 'artist_name', 'Pasticcio')
-    print(songs.search((('artist_name', ), [('song_id', '=', song)])))
-    songs.remove(song)
-    # songs.store_csv()
-    # songs.drop()

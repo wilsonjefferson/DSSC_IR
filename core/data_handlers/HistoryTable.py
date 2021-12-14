@@ -221,18 +221,3 @@ class HistoryTable(Table):
             user_id = random.choice(self.search(sql='SELECT user_id FROM USERS'))
             song_id = random.choice(self.search(sql='SELECT song_id FROM SONGS'))
             self.add_new_user_with_song(user_id, song_id)
-
-
-if __name__ == '__main__':
-    # history = HistoryTable()
-    history = HistoryTable('0', '0')
-    # history.add_new_user_with_song('1', '1')
-    # history.add_new_user_with_song('0', '0')
-    print(history.add('0', '1'))
-    history.update('0', '0')
-    # print('last date: ' + history.get_column_value('0', '0', 'last_date'))
-    print(history)
-    # history.store_csv()
-
-    # history.generator(10000)
-    # history.store_csv()

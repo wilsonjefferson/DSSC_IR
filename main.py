@@ -8,7 +8,7 @@ if __name__ == '__main__':
     ratings_csv_file = r'./sources/processed_data/yahoo_music/Ratings.csv'
 
     cli = UserCommandLineInterface(songs_csv_file, users_csv_file, history_csv_file, ratings_csv_file)
-    login_state = cli.login_page()
+    page_state = cli.login_page()
 
-    while login_state is True:
-        login_state = cli.home_page()
+    while page_state is True:
+        page_state = cli.home_page()

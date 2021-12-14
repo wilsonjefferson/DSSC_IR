@@ -263,16 +263,3 @@ class WeightedMFBasedRS(RecommenderSystem):
 
     def __str__(self):
         return self.print('WeightedMFBasedRS', self.rec_songs) if self.rec_songs else ''
-
-
-if __name__ == '__main__':
-    # wmf_recommender = WeightedMFBasedRS(path_file=r'../../sources/yahoo_music/Ratings.csv', separator=',',
-    #                                    regularization=0.05, n_latent_factors=20, n_iteration=111)
-
-    wmf_recommender = WeightedMFBasedRS(path_file=None, separator=',',
-                                        regularization=0.05, n_latent_factors=20, n_iteration=111)
-    user = '0'
-    recommended_songs = wmf_recommender.recommend_songs(user)
-
-    for song_id, score in recommended_songs.items():
-        print(song_id, score)

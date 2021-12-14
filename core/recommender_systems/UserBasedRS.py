@@ -432,11 +432,3 @@ class UserBasedRS(RecommenderSystem):
             print(title)
             for key, value in dictionary.items():
                 print(key, value)
-
-
-if __name__ == '__main__':
-    user_based_rs = UserBasedRS()
-    user = '0'
-    song = '2245'
-    user_based_rs.recommend_songs(user, song)
-    print(user_based_rs)
