@@ -14,7 +14,7 @@ class RecommenderSystem:
 
     def __init__(self, table_name: str = None):
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        db_path = os.path.join(base_dir, '../../sources/user_dataset.db')
+        db_path = os.path.join(base_dir, '../../sources/SQLite_quasi_real_database.db')
         self.sql_handler = SQLHandler(db_path)
         self.table_name = table_name
 
