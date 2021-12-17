@@ -23,18 +23,18 @@ And the following files:
 > 
 > - `sources` is not present because some of the data used are from Yahoo Music and they cannot shared,
 > to request this data visit the [Yahoo Music](https://webscope.sandbox.yahoo.com/catalog.php?datatype=r&guccounter=1&guce_referrer=aHR0cHM6Ly9naXRodWIuY29tL2Nhc2VyZWMvRGF0YXNldHMtZm9yLVJlY29tbWVuZGVyLVN5c3RlbXM&guce_referrer_sig=AQAAAN7Rd9jwCX7K1RAoHy0O-E4Y0cUUn8QcWM0yc7VjxbnRtRONGrG52TDRggfsMBvPjpANTkyOo1tzLtourTvc5PBpNETew-JPPnTLovfgtNmZnQ4ZO0L0T4YoofnxKE5J_Pxho1j413SRUfNNsTxVcgewZbdR45h19YdaatKjRvB6) webpage and submit a request.
-> - this project use a sql database called located in ./sources/user_dataset.db, so if you want to run this project you need to define the source folder with this database.
+> - this project use a sql database located in ./sources/SQLite_quasi_real_database.db, so if you want to run this project you need to define the source folder with this database.
 
 ## Data
 For this project two dataset are taken from external sources:
 - `SpotifyFeatures.csv` from [Kaggle](https://www.kaggle.com/zaheenhamidani/ultimate-spotify-tracks-db), it contains the fetures of each songs like author, name, and also technical information about the songs;
 - `Ratings.csv` from [Yahoo Music](https://webscope.sandbox.yahoo.com/catalog.php?datatype=r&guccounter=1&guce_referrer=aHR0cHM6Ly9naXRodWIuY29tL2Nhc2VyZWMvRGF0YXNldHMtZm9yLVJlY29tbWVuZGVyLVN5c3RlbXM&guce_referrer_sig=AQAAAN7Rd9jwCX7K1RAoHy0O-E4Y0cUUn8QcWM0yc7VjxbnRtRONGrG52TDRggfsMBvPjpANTkyOo1tzLtourTvc5PBpNETew-JPPnTLovfgtNmZnQ4ZO0L0T4YoofnxKE5J_Pxho1j413SRUfNNsTxVcgewZbdR45h19YdaatKjRvB6), it contains the ratings that users have given to songs.
 
-Other two dataset are created from these datasets:
+Other two datasets are created from these datasets:
 - `History.csv` from `Ratings.csv`, containing the history of each user, in particular songs they have listened;
 - `User.csv` from `Ratings.csv`, containing artificial users;
 
-These datasets are connected by means of primary keys, unfortunately there is no logical connection between `SpotifyFeatures.csv` and `Ratings.csv` since it was possible to find proper datasets.
+These datasets are connected by means of primary keys, unfortunately there is no logical connection between `SpotifyFeatures.csv` and `Ratings.csv` since it was not possible to find proper datasets.
 In any case, it is not a big problem since data from Yahoo are anonymized and we are interested just on the implementation of Recommender Systems.
 
 ## Running the program
